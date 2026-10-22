@@ -6,6 +6,7 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       fontFamily: 'Urbanist',
+      brightness: Brightness.light,
       scaffoldBackgroundColor: AppColors.background,
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.primary,
@@ -23,6 +24,34 @@ class AppTheme {
           fontWeight: FontWeight.bold,
           fontSize: 22,
           color: AppColors.textPrimary,
+        ),
+      ),
+    );
+  }
+
+  static ThemeData get darkTheme {
+    return ThemeData(
+      useMaterial3: true,
+      fontFamily: 'Urbanist',
+      brightness: Brightness.dark,
+      scaffoldBackgroundColor: const Color(0xFF121218),
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: AppColors.primary,
+        brightness: Brightness.dark,
+        primary: AppColors.primary,
+        secondary: AppColors.secondary,
+        surface: const Color(0xFF1E1A29),
+      ),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.white),
+        titleTextStyle: TextStyle(
+          fontFamily: 'Urbanist',
+          fontWeight: FontWeight.bold,
+          fontSize: 22,
+          color: Colors.white,
         ),
       ),
     );
