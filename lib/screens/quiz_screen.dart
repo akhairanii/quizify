@@ -42,6 +42,7 @@ class QuizScreen extends StatelessWidget {
                   'Kuis Pilihan Ganda',
                   style: TextStyle(color: isDark ? Colors.white : AppColors.textPrimary),
                 ),
+                iconTheme: IconThemeData(color: isDark ? Colors.white : AppColors.textPrimary),
                 automaticallyImplyLeading: false,
               ),
               Expanded(
@@ -59,11 +60,11 @@ class QuizScreen extends StatelessWidget {
                         width: double.infinity,
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: isDark ? const Color(0xFF1E1A29) : AppColors.cardBg,
+                          color: isDark ? const Color(0xFF2A233C) : AppColors.cardBg,
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.primary.withOpacity(0.06),
+                              color: AppColors.primary.withOpacity(0.1),
                               blurRadius: 15,
                               offset: const Offset(0, 5),
                             ),

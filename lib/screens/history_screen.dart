@@ -50,11 +50,11 @@ class HistoryScreen extends StatelessWidget {
                         width: double.infinity,
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: isDark ? const Color(0xFF1E1A29) : AppColors.cardBg,
+                          color: isDark ? const Color(0xFF2A233C) : AppColors.cardBg,
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.primary.withOpacity(0.06),
+                              color: AppColors.primary.withOpacity(0.15),
                               blurRadius: 15,
                               offset: const Offset(0, 5),
                             ),
@@ -114,7 +114,7 @@ class HistoryScreen extends StatelessWidget {
                                   context: context,
                                   builder: (context) {
                                     return AlertDialog(
-                                      backgroundColor: isDark ? const Color(0xFF1E1A29) : AppColors.cardBg,
+                                      backgroundColor: isDark ? const Color(0xFF2A233C) : AppColors.cardBg,
                                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                                       title: Text(
                                         'Detail Percobaan #${index + 1}',
@@ -184,11 +184,11 @@ class HistoryScreen extends StatelessWidget {
                                 margin: const EdgeInsets.only(bottom: 12),
                                 padding: const EdgeInsets.all(16),
                                 decoration: BoxDecoration(
-                                  color: isDark ? const Color(0xFF1E1A29) : AppColors.cardBg,
+                                  color: isDark ? const Color(0xFF2A233C) : AppColors.cardBg,
                                   borderRadius: BorderRadius.circular(16),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: AppColors.primary.withOpacity(0.05),
+                                      color: AppColors.primary.withOpacity(0.12),
                                       blurRadius: 10,
                                       offset: const Offset(0, 4),
                                     ),

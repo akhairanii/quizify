@@ -19,100 +19,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   final Map<String, List<String>> _universityData = {
-    'Fakultas Kedokteran': [
-      'Pendidikan Dokter',
-      'Ilmu Biomedik',
-    ],
-    'Fakultas Hukum': [
-      'Ilmu Hukum',
-    ],
-    'Fakultas Pertanian': [
-      'Agroteknologi',
-      'Agribisnis',
-      'Ilmu dan Teknologi Pangan',
-      'Manajemen Sumber Daya Perairan',
-      'Peternakan',
-      'Keteknikan Pertanian',
-      'Penyuluhan dan Komunikasi Pertanian',
-    ],
-    'Fakultas Teknik': [
-      'Teknik Sipil',
-      'Teknik Mesin',
-      'Teknik Elektro',
-      'Teknik Industri',
-      'Teknik Kimia',
-      'Arsitektur',
-      'Teknik Lingkungan',
-    ],
-    'Fakultas Ekonomi dan Bisnis': [
-      'Manajemen',
-      'Akuntansi',
-      'Ekonomi Pembangunan',
-      'Kewirausahaan',
-    ],
-    'Fakultas Kedokteran Gigi': [
-      'Pendidikan Dokter Gigi',
-    ],
-    'Fakultas Ilmu Budaya': [
-      'Sastra Indonesia',
-      'Sastra Inggris',
-      'Sastra Batak',
-      'Sastra Melayu',
-      'Sastra Jepang',
-      'Ilmu Sejarah',
-      'Etnomusikologi',
-      'Perpustakaan dan Sains Informasi',
-    ],
-    'Fakultas Matematika dan Ilmu Pengetahuan Alam (FMIPA)': [
-      'Matematika',
-      'Fisika',
-      'Kimia',
-      'Biologi',
-      'Statistika',
-      'Aktuaria',
-      'Kimia Terapan',
-    ],
-    'Fakultas Ilmu Sosial dan Ilmu Politik (FISIP)': [
-      'Ilmu Administrasi Publik',
-      'Ilmu Administrasi Bisnis / Niaga',
-      'Ilmu Kesejahteraan Sosial',
-      'Ilmu Komunikasi',
-      'Ilmu Politik',
-      'Sosiologi',
-      'Antropologi Sosial',
-    ],
-    'Fakultas Kesehatan Masyarakat (FKM)': [
-      'Kesehatan Masyarakat',
-      'Gizi',
-    ],
-    'Fakultas Farmasi': [
-      'Farmasi',
-    ],
-    'Fakultas Psikologi': [
-      'Psikologi',
-    ],
-    'Fakultas Keperawatan': [
-      'Ilmu Keperawatan',
-    ],
-    'Fakultas Ilmu Komputer dan Teknologi Informasi (Fasilkom-TI)': [
-      'Ilmu Komputer',
-      'Teknologi Informasi',
-    ],
-    'Fakultas Kehutanan': [
-      'Kehutanan / Ilmu Kehutanan',
-    ],
-    'Fakultas Vokasi': [
-      'D3 Teknik Informatika',
-      'D3 Statistika',
-      'D3 Keuangan',
-      'D3 Akuntansi',
-      'D3 Kesekretariatan',
-      'D3 Perpajakan',
-      'D3 Perjalanan Wisata',
-      'D3 Perpustakaan',
-      'D3 Metrologi dan Instrumentasi',
-      'D3 Analis Farmasi dan Makanan',
-    ],
+    'Fakultas Kedokteran': ['Pendidikan Dokter', 'Ilmu Biomedik'],
+    'Fakultas Hukum': ['Ilmu Hukum'],
+    'Fakultas Pertanian': ['Agroteknologi', 'Agribisnis', 'Ilmu dan Teknologi Pangan', 'Manajemen Sumber Daya Perairan', 'Peternakan', 'Keteknikan Pertanian', 'Penyuluhan dan Komunikasi Pertanian'],
+    'Fakultas Teknik': ['Teknik Sipil', 'Teknik Mesin', 'Teknik Elektro', 'Teknik Industri', 'Teknik Kimia', 'Arsitektur', 'Teknik Lingkungan'],
+    'Fakultas Ekonomi dan Bisnis': ['Manajemen', 'Akuntansi', 'Ekonomi Pembangunan', 'Kewirausahaan'],
+    'Fakultas Kedokteran Gigi': ['Pendidikan Dokter Gigi'],
+    'Fakultas Ilmu Budaya': ['Sastra Indonesia', 'Sastra Inggris', 'Sastra Batak', 'Sastra Melayu', 'Sastra Jepang', 'Ilmu Sejarah', 'Etnomusikologi', 'Perpustakaan dan Sains Informasi'],
+    'Fakultas Matematika dan Ilmu Pengetahuan Alam (FMIPA)': ['Matematika', 'Fisika', 'Kimia', 'Biologi', 'Statistika', 'Aktuaria', 'Kimia Terapan'],
+    'Fakultas Ilmu Sosial dan Ilmu Politik (FISIP)': ['Ilmu Administrasi Publik', 'Ilmu Administrasi Bisnis / Niaga', 'Ilmu Kesejahteraan Sosial', 'Ilmu Komunikasi', 'Ilmu Politik', 'Sosiologi', 'Antropologi Sosial'],
+    'Fakultas Kesehatan Masyarakat (FKM)': ['Kesehatan Masyarakat', 'Gizi'],
+    'Fakultas Farmasi': ['Farmasi'],
+    'Fakultas Psikologi': ['Psikologi'],
+    'Fakultas Keperawatan': ['Ilmu Keperawatan'],
+    'Fakultas Ilmu Komputer dan Teknologi Informasi (Fasilkom-TI)': ['Ilmu Komputer', 'Teknologi Informasi'],
+    'Fakultas Kehutanan': ['Kehutanan / Ilmu Kehutanan'],
+    'Fakultas Vokasi': ['D3 Teknik Informatika', 'D3 Statistika', 'D3 Keuangan', 'D3 Akuntansi', 'D3 Kesekretariatan', 'D3 Perpajakan', 'D3 Perjalanan Wisata', 'D3 Perpustakaan', 'D3 Metrologi dan Instrumentasi', 'D3 Analis Farmasi dan Makanan'],
   };
 
   String? _selectedFaculty;
@@ -170,6 +92,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDark = themeProvider.isDarkMode;
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -180,7 +103,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: themeProvider.isDarkMode
+            colors: isDark
                 ? [const Color(0xFF1E1A29), const Color(0xFF121218)]
                 : [const Color(0xFFF7F5FF), const Color(0xFFEEDCFF), const Color(0xFFD4F1FF)],
           ),
@@ -191,7 +114,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               AppBar(
                 backgroundColor: Colors.transparent,
                 elevation: 0,
-                title: const Text('Daftar Akun'),
+                title: Text('Daftar Akun', style: TextStyle(color: isDark ? Colors.white : AppColors.textPrimary)),
+                iconTheme: IconThemeData(color: isDark ? Colors.white : AppColors.textPrimary),
               ),
               Expanded(
                 child: Padding(
@@ -201,21 +125,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(height: 16),
-                        const Text(
+                        Text(
                           'Buat Akun Baru',
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.textPrimary,
+                            color: isDark ? Colors.white : AppColors.textPrimary,
                           ),
                         ),
                         const SizedBox(height: 8),
-                        const Text(
+                        Text(
                           'Daftarkan diri kamu untuk mulai bermain kuis.',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
+                            color: isDark ? Colors.white70 : AppColors.textPrimary,
                           ),
                         ),
                         const SizedBox(height: 24),
@@ -240,15 +164,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const SizedBox(height: 16),
                         DropdownButtonFormField<String>(
                           value: _selectedFaculty,
-                          hint: const Text('Pilih Fakultas'),
+                          hint: Text(
+                            'Pilih Fakultas',
+                            style: TextStyle(color: isDark ? Colors.white70 : AppColors.textSecondary.withOpacity(0.6)),
+                          ),
+                          dropdownColor: isDark ? const Color(0xFF2A233C) : AppColors.cardBg,
                           isExpanded: true,
+                          style: TextStyle(color: isDark ? Colors.white : AppColors.textPrimary, fontFamily: 'Urbanist', fontWeight: FontWeight.w500),
                           decoration: InputDecoration(
                             prefixIcon: const Icon(Icons.business_outlined, color: AppColors.primary),
                             filled: true,
-                            fillColor: AppColors.cardBg,
+                            fillColor: isDark ? const Color(0xFF2A233C) : AppColors.cardBg,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
                               borderSide: BorderSide.none,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide(
+                                color: isDark ? AppColors.primary.withOpacity(0.4) : AppColors.primary.withOpacity(0.2),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: const BorderSide(color: AppColors.primary, width: 2),
                             ),
                           ),
                           items: _universityData.keys.map((String faculty) {
@@ -268,15 +207,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const SizedBox(height: 16),
                         DropdownButtonFormField<String>(
                           value: _selectedStudyProgram,
-                          hint: const Text('Pilih Program Studi'),
+                          hint: Text(
+                            'Pilih Program Studi',
+                            style: TextStyle(color: isDark ? Colors.white70 : AppColors.textSecondary.withOpacity(0.6)),
+                          ),
+                          dropdownColor: isDark ? const Color(0xFF2A233C) : AppColors.cardBg,
                           isExpanded: true,
+                          style: TextStyle(color: isDark ? Colors.white : AppColors.textPrimary, fontFamily: 'Urbanist', fontWeight: FontWeight.w500),
                           decoration: InputDecoration(
                             prefixIcon: const Icon(Icons.school_outlined, color: AppColors.primary),
                             filled: true,
-                            fillColor: AppColors.cardBg,
+                            fillColor: isDark ? const Color(0xFF2A233C) : AppColors.cardBg,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16),
                               borderSide: BorderSide.none,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide(
+                                color: isDark ? AppColors.primary.withOpacity(0.4) : AppColors.primary.withOpacity(0.2),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: const BorderSide(color: AppColors.primary, width: 2),
                             ),
                           ),
                           items: _availableStudyPrograms.map((String prodi) {

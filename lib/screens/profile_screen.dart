@@ -74,11 +74,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         width: double.infinity,
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: isDark ? const Color(0xFF1E1A29) : AppColors.cardBg,
+                          color: isDark ? const Color(0xFF2A233C) : AppColors.cardBg,
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
-                              color: AppColors.primary.withOpacity(0.06),
+                              color: AppColors.primary.withOpacity(0.15),
                               blurRadius: 15,
                               offset: const Offset(0, 5),
                             ),
@@ -105,7 +105,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
-                                color: isDark ? Colors.white70 : AppColors.textPrimary,
+                                color: isDark ? Colors.white70 : AppColors.textSecondary,
                               ),
                             ),
                             const Divider(height: 24),
@@ -120,7 +120,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w600,
-                                          color: isDark ? Colors.white70 : AppColors.textPrimary,
+                                          color: isDark ? Colors.white70 : AppColors.textSecondary,
                                         ),
                                       ),
                                       const SizedBox(height: 4),
@@ -141,7 +141,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w600,
-                                          color: isDark ? Colors.white70 : AppColors.textPrimary,
+                                          color: isDark ? Colors.white70 : AppColors.textSecondary,
                                         ),
                                       ),
                                       const SizedBox(height: 4),
@@ -184,23 +184,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
-                          color: isDark ? Colors.white70 : AppColors.textPrimary,
+                          color: isDark ? Colors.white70 : AppColors.textSecondary,
                         ),
                       ),
                       const SizedBox(height: 12),
-                      TextField(
-                        controller: _motivationController,
-                        enabled: _isEditing,
-                        maxLines: 3,
-                        style: TextStyle(color: isDark ? Colors.white : AppColors.textPrimary),
-                        decoration: InputDecoration(
-                          hintText: 'Belum ada motivasi...',
-                          hintStyle: TextStyle(color: isDark ? Colors.white38 : AppColors.textSecondary),
-                          filled: true,
-                          fillColor: isDark ? const Color(0xFF1E1A29) : AppColors.cardBg,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide.none,
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.primary.withOpacity(0.15),
+                              blurRadius: 15,
+                              offset: const Offset(0, 5),
+                            ),
+                          ],
+                        ),
+                        child: TextField(
+                          controller: _motivationController,
+                          enabled: _isEditing,
+                          maxLines: 3,
+                          style: TextStyle(color: isDark ? Colors.white : AppColors.textPrimary),
+                          decoration: InputDecoration(
+                            hintText: 'Belum ada motivasi...',
+                            hintStyle: TextStyle(color: isDark ? Colors.white38 : AppColors.textSecondary),
+                            filled: true,
+                            fillColor: isDark ? const Color(0xFF2A233C) : AppColors.cardBg,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide.none,
+                            ),
                           ),
                         ),
                       ),
