@@ -2,147 +2,171 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_colors.dart';
 import '../providers/auth_provider.dart';
-import '../providers/quiz_provider.dart';
+import '../providers/theme_provider.dart';
 import '../widgets/custom_button.dart';
+import '../widgets/custom_text_field.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final TextEditingController _reasonController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    _reasonController.text = authProvider.currentUser?.reason ?? '';
+  }
+
+  @override
+  void dispose() {
+    _reasonController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
-    final quizProvider = Provider.of<QuizProvider>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
     final user = authProvider.currentUser;
+    final isDark = themeProvider.isDarkMode;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profil Pengguna'),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
+      backgroundColor: Colors.transparent,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: isDark
+                ? [const Color(0xFF1E1A29), const Color(0xFF121218)]
+                : [const Color(0xFFF7F5FF), const Color(0xFFEEDCFF), const Color(0xFFD4F1FF)],
+          ),
+        ),
+        child: SafeArea(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: AppColors.cardBg,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.primary.withOpacity(0.06),
-                      blurRadius: 15,
-                      offset: const Offset(0, 5),
-                    ),
-                  ],
+              AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                title: Text(
+                  'Profil Pengguna',
+                  style: TextStyle(color: isDark ? Colors.white : AppColors.textPrimary),
                 ),
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 35,
-                      backgroundColor: AppColors.primarySoft,
-                      child: Text(
-                        user != null && user.name.isNotEmpty ? user.name[0].toUpperCase() : 'P',
-                        style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppColors.primary),
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      user?.name ?? 'Pengguna',
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      user?.email ?? '-',
-                      style: const TextStyle(fontSize: 14, color: AppColors.textSecondary),
-                    ),
-                    const Divider(height: 24),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          children: [
-                            const Text('Fakultas', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                            const SizedBox(height: 4),
-                            Text(user?.faculty ?? '-', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13), textAlign: TextAlign.center),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            const Text('Program Studi', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                            const SizedBox(height: 4),
-                            Text(user?.studyProgram ?? '-', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13), textAlign: TextAlign.center),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                iconTheme: IconThemeData(color: isDark ? Colors.white : AppColors.textPrimary),
               ),
-              const SizedBox(height: 24),
-              const Text(
-                'Riwayat Skor Kuis',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textPrimary),
-              ),
-              const SizedBox(height: 12),
               Expanded(
-                child: quizProvider.quizHistories.isEmpty
-                    ? const Center(
-                  child: Text('Belum ada riwayat kuis. Ayo mulai kuis sekarang!', style: TextStyle(color: AppColors.textSecondary)),
-                )
-                    : ListView.builder(
-                  itemCount: quizProvider.quizHistories.length,
-                  itemBuilder: (context, index) {
-                    final history = quizProvider.quizHistories[index];
-                    return Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: AppColors.cardBg,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: AppColors.primarySoft),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              const Icon(Icons.history_edu_rounded, color: AppColors.primary),
-                              const SizedBox(width: 12),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Percobaan #${index + 1}', style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
-                                  Text(history.date, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-                                ],
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: isDark ? const Color(0xFF1E1A29) : AppColors.cardBg,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.primary.withOpacity(0.06),
+                              blurRadius: 15,
+                              offset: const Offset(0, 5),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              radius: 35,
+                              backgroundColor: AppColors.primarySoft,
+                              child: Text(
+                                user != null && user.name.isNotEmpty ? user.name[0].toUpperCase() : 'P',
+                                style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppColors.primary),
                               ),
-                            ],
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: AppColors.primarySoft,
-                              borderRadius: BorderRadius.circular(8),
                             ),
-                            child: Text(
-                              'Skor: ${history.score}',
-                              style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.primary),
+                            const SizedBox(height: 12),
+                            Text(
+                              user?.name ?? 'Pengguna',
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: isDark ? Colors.white : AppColors.textPrimary),
                             ),
-                          ),
-                        ],
+                            const SizedBox(height: 4),
+                            Text(
+                              user?.email ?? '-',
+                              style: TextStyle(fontSize: 14, color: isDark ? Colors.white70 : AppColors.textSecondary),
+                            ),
+                            const Divider(height: 24),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    children: [
+                                      const Text('Fakultas', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        user?.faculty ?? '-',
+                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: isDark ? Colors.white : AppColors.textPrimary),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(height: 30, width: 1, color: AppColors.primarySoft),
+                                Expanded(
+                                  child: Column(
+                                    children: [
+                                      const Text('Program Studi', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        user?.studyProgram ?? '-',
+                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: isDark ? Colors.white : AppColors.textPrimary),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    );
-                  },
+                      const SizedBox(height: 24),
+                      Text(
+                        'Alasan Ikut Serta Kuis Fasilkom-TI',
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: isDark ? Colors.white : AppColors.textPrimary),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Tuliskan alasan Anda mengikuti kuis Fasilkom-TI meskipun berasal dari luar fakultas:',
+                        style: TextStyle(fontSize: 13, color: isDark ? Colors.white70 : AppColors.textSecondary),
+                      ),
+                      const SizedBox(height: 12),
+                      CustomTextField(
+                        controller: _reasonController,
+                        hintText: 'Masukkan alasan Anda di sini...',
+                        prefixIcon: Icons.edit_note_rounded,
+                      ),
+                      const SizedBox(height: 24),
+                      CustomButton(
+                        text: 'Simpan Alasan 💾',
+                        onPressed: () {
+                          authProvider.updateReason(_reasonController.text.trim());
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Alasan berhasil disimpan!')),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              CustomButton(
-                text: 'Kembali ke Beranda 🏠',
-                onPressed: () {
-                  Navigator.pop(context);
-                },
               ),
             ],
           ),
