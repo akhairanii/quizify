@@ -6,8 +6,16 @@ class QuizHistory {
   final int score;
   final String date;
   final String category;
+  final int correctCount;
+  final int incorrectCount;
 
-  QuizHistory({required this.score, required this.date, required this.category});
+  QuizHistory({
+    required this.score,
+    required this.date,
+    required this.category,
+    required this.correctCount,
+    required this.incorrectCount,
+  });
 }
 
 class QuizProvider extends ChangeNotifier {
@@ -17,6 +25,7 @@ class QuizProvider extends ChangeNotifier {
   int _score = 0;
   int? _selectedAnswerIndex;
   bool _isAnswered = false;
+  int _correctAnswersCount = 0;
 
   final List<QuizHistory> _quizHistories = [];
 
@@ -30,11 +39,20 @@ class QuizProvider extends ChangeNotifier {
   bool get isAnswered => _isAnswered;
   List<QuizHistory> get quizHistories => _quizHistories;
 
+  int get totalOverallScore {
+    int total = 0;
+    for (var history in _quizHistories) {
+      total += history.score;
+    }
+    return total;
+  }
+
   void loadQuiz(String category) {
     _currentCategory = category;
     _questions = quizCategories[category] ?? quizCategories['Mobile Programming']!;
     _currentQuestionIndex = 0;
     _score = 0;
+    _correctAnswersCount = 0;
     _selectedAnswerIndex = null;
     _isAnswered = false;
     notifyListeners();
@@ -49,6 +67,7 @@ class QuizProvider extends ChangeNotifier {
     if (index == currentQuestion.correctAnswerIndex) {
       int pointsPerQuestion = (100 / _questions.length).round();
       _score += pointsPerQuestion;
+      _correctAnswersCount++;
     }
     notifyListeners();
   }
@@ -62,7 +81,14 @@ class QuizProvider extends ChangeNotifier {
       return true;
     } else {
       String formattedDate = "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year} ${DateTime.now().hour}:${DateTime.now().minute}";
-      _quizHistories.add(QuizHistory(score: _score, date: formattedDate, category: _currentCategory));
+      int incorrect = _questions.length - _correctAnswersCount;
+      _quizHistories.add(QuizHistory(
+        score: _score,
+        date: formattedDate,
+        category: _currentCategory,
+        correctCount: _correctAnswersCount,
+        incorrectCount: incorrect,
+      ));
       notifyListeners();
     }
     return false;
@@ -71,6 +97,7 @@ class QuizProvider extends ChangeNotifier {
   void resetQuiz() {
     _currentQuestionIndex = 0;
     _score = 0;
+    _correctAnswersCount = 0;
     _selectedAnswerIndex = null;
     _isAnswered = false;
     notifyListeners();

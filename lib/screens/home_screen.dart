@@ -8,6 +8,7 @@ import 'package:quizify/data/quiz_data.dart';
 import '../widgets/custom_button.dart';
 import 'quiz_screen.dart';
 import 'profile_screen.dart';
+import 'history_screen.dart';
 import 'signin_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -181,7 +182,7 @@ class HomeScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const ProfileScreen(),
+                                builder: (context) => const HistoryScreen(),
                               ),
                             );
                           },
