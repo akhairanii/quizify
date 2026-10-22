@@ -140,6 +140,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
       return;
     }
 
+    if (password.length < 8) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Kata sandi harus minimal 8 karakter!')),
+      );
+      return;
+    }
+
     bool success = authProvider.signUp(
       name: name,
       email: email,
@@ -195,7 +202,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       children: [
                         const SizedBox(height: 16),
                         const Text(
-                          'Buat Akun Baru ✨',
+                          'Buat Akun Baru',
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
@@ -207,7 +214,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           'Daftarkan diri kamu untuk mulai bermain kuis.',
                           style: TextStyle(
                             fontSize: 16,
-                            color: AppColors.textSecondary,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.textPrimary,
                           ),
                         ),
                         const SizedBox(height: 24),

@@ -64,13 +64,21 @@ class HistoryScreen extends StatelessWidget {
                           children: [
                             Text(
                               'Skor Keseluruhan Kuis yang Dikerjakan',
-                              style: TextStyle(fontSize: 14, color: isDark ? Colors.white70 : AppColors.textSecondary),
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: isDark ? Colors.white70 : AppColors.textPrimary,
+                              ),
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: 8),
                             Text(
                               '${quizProvider.totalOverallScore}',
-                              style: const TextStyle(fontSize: 36, fontWeight: FontWeight.bold, color: AppColors.primary),
+                              style: const TextStyle(
+                                fontSize: 36,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.primary,
+                              ),
                             ),
                           ],
                         ),
@@ -78,7 +86,11 @@ class HistoryScreen extends StatelessWidget {
                       const SizedBox(height: 24),
                       Text(
                         'Skor Kuis',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: isDark ? Colors.white : AppColors.textPrimary),
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: isDark ? Colors.white : AppColors.textPrimary,
+                        ),
                       ),
                       const SizedBox(height: 12),
                       Expanded(
@@ -86,7 +98,10 @@ class HistoryScreen extends StatelessWidget {
                             ? Center(
                           child: Text(
                             'Belum ada riwayat kuis.',
-                            style: TextStyle(color: isDark ? Colors.white70 : AppColors.textSecondary),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: isDark ? Colors.white70 : AppColors.textPrimary,
+                            ),
                           ),
                         )
                             : ListView.builder(
@@ -109,15 +124,32 @@ class HistoryScreen extends StatelessWidget {
                                         mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text('Kategori: ${history.category}', style: TextStyle(color: isDark ? Colors.white70 : AppColors.textSecondary)),
+                                          Text(
+                                            'Kategori: ${history.category}',
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                              color: isDark ? Colors.white70 : AppColors.textPrimary,
+                                            ),
+                                          ),
                                           const SizedBox(height: 8),
-                                          Text('Tanggal: ${history.date}', style: TextStyle(color: isDark ? Colors.white70 : AppColors.textSecondary)),
+                                          Text(
+                                            'Tanggal: ${history.date}',
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                              color: isDark ? Colors.white70 : AppColors.textPrimary,
+                                            ),
+                                          ),
                                           const SizedBox(height: 12),
                                           Row(
                                             children: [
                                               const Icon(Icons.check_circle, color: AppColors.success, size: 20),
                                               const SizedBox(width: 8),
-                                              Text('Jawaban Benar: ${history.correctCount}', style: TextStyle(fontWeight: FontWeight.bold, color: isDark ? Colors.white : AppColors.textPrimary)),
+                                              Text(
+                                                'Jawaban Benar: ${history.correctCount}',
+                                                style: TextStyle(fontWeight: FontWeight.bold, color: isDark ? Colors.white : AppColors.textPrimary),
+                                              ),
                                             ],
                                           ),
                                           const SizedBox(height: 8),
@@ -125,11 +157,17 @@ class HistoryScreen extends StatelessWidget {
                                             children: [
                                               const Icon(Icons.cancel, color: AppColors.error, size: 20),
                                               const SizedBox(width: 8),
-                                              Text('Jawaban Salah: ${history.incorrectCount}', style: TextStyle(fontWeight: FontWeight.bold, color: isDark ? Colors.white : AppColors.textPrimary)),
+                                              Text(
+                                                'Jawaban Salah: ${history.incorrectCount}',
+                                                style: TextStyle(fontWeight: FontWeight.bold, color: isDark ? Colors.white : AppColors.textPrimary),
+                                              ),
                                             ],
                                           ),
                                           const SizedBox(height: 12),
-                                          Text('Skor: ${history.score}', style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.primary, fontSize: 16)),
+                                          Text(
+                                            'Skor: ${history.score}',
+                                            style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.primary, fontSize: 16),
+                                          ),
                                         ],
                                       ),
                                       actions: [
@@ -174,12 +212,20 @@ class HistoryScreen extends StatelessWidget {
                                           children: [
                                             Text(
                                               history.category,
-                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: isDark ? Colors.white : AppColors.textPrimary),
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15,
+                                                color: isDark ? Colors.white : AppColors.textPrimary,
+                                              ),
                                             ),
                                             const SizedBox(height: 2),
                                             Text(
                                               history.date,
-                                              style: TextStyle(fontSize: 12, color: isDark ? Colors.white60 : AppColors.textSecondary),
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                color: isDark ? Colors.white60 : AppColors.textSecondary,
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -205,7 +251,7 @@ class HistoryScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       CustomButton(
-                        text: 'Kembali ke Beranda 🏠',
+                        text: 'Kembali ke Beranda',
                         onPressed: () {
                           Navigator.pop(context);
                         },

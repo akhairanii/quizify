@@ -103,7 +103,7 @@ class QuizScreen extends StatelessWidget {
                         CustomButton(
                           text: quizProvider.currentQuestionIndex < quizProvider.totalQuestions - 1
                               ? 'Lanjut Soal Berikutnya ➔'
-                              : 'Lihat Hasil Akhir 🎉',
+                              : 'Lihat Hasil Akhir',
                           onPressed: () {
                             bool hasNext = quizProvider.nextQuestion();
                             if (!hasNext) {

@@ -102,7 +102,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             const SizedBox(height: 4),
                             Text(
                               user?.email ?? '-',
-                              style: TextStyle(fontSize: 14, color: isDark ? Colors.white70 : AppColors.textSecondary),
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: isDark ? Colors.white70 : AppColors.textPrimary,
+                              ),
                             ),
                             const Divider(height: 24),
                             Row(
@@ -111,7 +115,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 Expanded(
                                   child: Column(
                                     children: [
-                                      const Text('Fakultas', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                                      Text(
+                                        'Fakultas',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                          color: isDark ? Colors.white70 : AppColors.textPrimary,
+                                        ),
+                                      ),
                                       const SizedBox(height: 4),
                                       Text(
                                         user?.faculty ?? '-',
@@ -125,7 +136,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 Expanded(
                                   child: Column(
                                     children: [
-                                      const Text('Program Studi', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                                      Text(
+                                        'Program Studi',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                          color: isDark ? Colors.white70 : AppColors.textPrimary,
+                                        ),
+                                      ),
                                       const SizedBox(height: 4),
                                       Text(
                                         user?.studyProgram ?? '-',
@@ -163,7 +181,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(height: 8),
                       Text(
                         'Tuliskan motivasi atau kata-kata semangat belajar Anda:',
-                        style: TextStyle(fontSize: 13, color: isDark ? Colors.white70 : AppColors.textSecondary),
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                          color: isDark ? Colors.white70 : AppColors.textPrimary,
+                        ),
                       ),
                       const SizedBox(height: 12),
                       TextField(

@@ -25,7 +25,8 @@ class ProgressBar extends StatelessWidget {
               style: const TextStyle(
                 fontFamily: 'Urbanist',
                 fontWeight: FontWeight.bold,
-                color: AppColors.textSecondary,
+                fontSize: 15,
+                color: AppColors.textPrimary,
               ),
             ),
             Text(
@@ -33,7 +34,8 @@ class ProgressBar extends StatelessWidget {
               style: const TextStyle(
                 fontFamily: 'Urbanist',
                 fontWeight: FontWeight.bold,
-                color: AppColors.primary,
+                fontSize: 15,
+                color: AppColors.textPrimary,
               ),
             ),
           ],
@@ -44,7 +46,7 @@ class ProgressBar extends StatelessWidget {
           child: LinearProgressIndicator(
             value: progress,
             minHeight: 10,
-            backgroundColor: AppColors.primarySoft,
+            backgroundColor: AppColors.primary.withOpacity(0.25),
             valueColor: const AlwaysStoppedAnimation<Color>(AppColors.secondary),
           ),
         ),

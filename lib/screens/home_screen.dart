@@ -5,7 +5,6 @@ import 'package:quizify/providers/auth_provider.dart';
 import 'package:quizify/providers/quiz_provider.dart';
 import 'package:quizify/providers/theme_provider.dart';
 import 'package:quizify/data/quiz_data.dart';
-import '../widgets/custom_button.dart';
 import 'quiz_screen.dart';
 import 'profile_screen.dart';
 import 'history_screen.dart';
@@ -109,74 +108,99 @@ class _HomeScreenState extends State<HomeScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16,
-                          color: isDark ? Colors.white70 : AppColors.textSecondary,
+                          fontWeight: FontWeight.w600,
+                          color: isDark ? Colors.white : AppColors.textPrimary,
                         ),
                       ),
                       const SizedBox(height: 40),
-                      CustomButton(
-                        text: 'Mulai Kuis',
-                        isSelected: _selectedNav == 'mulai',
-                        onPressed: () {
-                          setState(() {
-                            _selectedNav = 'mulai';
-                          });
-                          showModalBottomSheet(
-                            context: context,
-                            backgroundColor: isDark ? const Color(0xFF1E1A29) : AppColors.cardBg,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 54,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: _selectedNav == 'mulai' ? AppColors.accentPink : AppColors.primary,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
                             ),
-                            builder: (context) {
-                              return Container(
-                                padding: const EdgeInsets.all(24),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Pilih Kategori Program Studi',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: isDark ? Colors.white : AppColors.textPrimary,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 16),
-                                    ...quizCategories.keys.map((category) {
-                                      return Padding(
-                                        padding: const EdgeInsets.only(bottom: 8.0),
-                                        child: ListTile(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(16),
-                                          ),
-                                          tileColor: isDark ? const Color(0xFF121218) : AppColors.primarySoft.withOpacity(0.5),
-                                          title: Text(
-                                            category,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: isDark ? Colors.white : AppColors.textPrimary,
-                                            ),
-                                          ),
-                                          trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.primary),
-                                          onTap: () {
-                                            Navigator.pop(context);
-                                            Provider.of<QuizProvider>(context, listen: false).loadQuiz(category);
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) => const QuizScreen(),
-                                              ),
-                                            );
-                                          },
+                            elevation: _selectedNav == 'mulai' ? 6 : 2,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _selectedNav = 'mulai';
+                            });
+                            showModalBottomSheet(
+                              context: context,
+                              backgroundColor: isDark ? const Color(0xFF1E1A29) : AppColors.cardBg,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                              ),
+                              builder: (context) {
+                                return Container(
+                                  padding: const EdgeInsets.all(24),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Pilih Kategori Program Studi',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: isDark ? Colors.white : AppColors.textPrimary,
                                         ),
-                                      );
-                                    }),
-                                  ],
+                                      ),
+                                      const SizedBox(height: 16),
+                                      ...quizCategories.keys.map((category) {
+                                        return Padding(
+                                          padding: const EdgeInsets.only(bottom: 8.0),
+                                          child: ListTile(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(16),
+                                            ),
+                                            tileColor: isDark ? const Color(0xFF121218) : AppColors.primarySoft.withOpacity(0.5),
+                                            title: Text(
+                                              category,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: isDark ? Colors.white : AppColors.textPrimary,
+                                              ),
+                                            ),
+                                            trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.primary),
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                              Provider.of<QuizProvider>(context, listen: false).loadQuiz(category);
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => const QuizScreen(),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        );
+                                      }),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Mulai Kuis',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                              );
-                            },
-                          );
-                        },
+                              ),
+                              SizedBox(width: 8),
+                              Icon(Icons.arrow_forward_rounded, size: 20),
+                            ],
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 16),
                       InkWell(
