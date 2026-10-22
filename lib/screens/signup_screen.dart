@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_colors.dart';
 import '../providers/auth_provider.dart';
+import '../providers/theme_provider.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
 
@@ -161,113 +162,139 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Daftar Akun')),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 16),
-                const Text(
-                  'Buat Akun Baru ✨',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.textPrimary,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Daftarkan diri kamu untuk mulai bermain kuis.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                CustomTextField(
-                  controller: _nameController,
-                  hintText: 'Nama Lengkap',
-                  prefixIcon: Icons.person_outline,
-                ),
-                const SizedBox(height: 16),
-                CustomTextField(
-                  controller: _emailController,
-                  hintText: 'Alamat Email',
-                  prefixIcon: Icons.email_outlined,
-                ),
-                const SizedBox(height: 16),
-                CustomTextField(
-                  controller: _passwordController,
-                  hintText: 'Kata Sandi',
-                  prefixIcon: Icons.lock_outline,
-                  isPassword: true,
-                ),
-                const SizedBox(height: 16),
-                DropdownButtonFormField<String>(
-                  value: _selectedFaculty,
-                  hint: const Text('Pilih Fakultas'),
-                  isExpanded: true,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.business_outlined, color: AppColors.primary),
-                    filled: true,
-                    fillColor: AppColors.cardBg,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide.none,
+      backgroundColor: Colors.transparent,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: themeProvider.isDarkMode
+                ? [const Color(0xFF1E1A29), const Color(0xFF121218)]
+                : [const Color(0xFFF7F5FF), const Color(0xFFEEDCFF), const Color(0xFFD4F1FF)],
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            children: [
+              AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                title: const Text('Daftar Akun'),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 16),
+                        const Text(
+                          'Buat Akun Baru ✨',
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.textPrimary,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        const Text(
+                          'Daftarkan diri kamu untuk mulai bermain kuis.',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        CustomTextField(
+                          controller: _nameController,
+                          hintText: 'Nama Lengkap',
+                          prefixIcon: Icons.person_outline,
+                        ),
+                        const SizedBox(height: 16),
+                        CustomTextField(
+                          controller: _emailController,
+                          hintText: 'Alamat Email',
+                          prefixIcon: Icons.email_outlined,
+                        ),
+                        const SizedBox(height: 16),
+                        CustomTextField(
+                          controller: _passwordController,
+                          hintText: 'Kata Sandi',
+                          prefixIcon: Icons.lock_outline,
+                          isPassword: true,
+                        ),
+                        const SizedBox(height: 16),
+                        DropdownButtonFormField<String>(
+                          value: _selectedFaculty,
+                          hint: const Text('Pilih Fakultas'),
+                          isExpanded: true,
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.business_outlined, color: AppColors.primary),
+                            filled: true,
+                            fillColor: AppColors.cardBg,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
+                          items: _universityData.keys.map((String faculty) {
+                            return DropdownMenuItem<String>(
+                              value: faculty,
+                              child: Text(faculty, overflow: TextOverflow.ellipsis),
+                            );
+                          }).toList(),
+                          onChanged: (String? newFaculty) {
+                            setState(() {
+                              _selectedFaculty = newFaculty;
+                              _selectedStudyProgram = null;
+                              _availableStudyPrograms = _universityData[newFaculty] ?? [];
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        DropdownButtonFormField<String>(
+                          value: _selectedStudyProgram,
+                          hint: const Text('Pilih Program Studi'),
+                          isExpanded: true,
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.school_outlined, color: AppColors.primary),
+                            filled: true,
+                            fillColor: AppColors.cardBg,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
+                          items: _availableStudyPrograms.map((String prodi) {
+                            return DropdownMenuItem<String>(
+                              value: prodi,
+                              child: Text(prodi, overflow: TextOverflow.ellipsis),
+                            );
+                          }).toList(),
+                          onChanged: _selectedFaculty == null ? null : (String? newProdi) {
+                            setState(() {
+                              _selectedStudyProgram = newProdi;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 24),
+                        CustomButton(
+                          text: 'Daftar',
+                          onPressed: _handleSignUp,
+                        ),
+                        const SizedBox(height: 24),
+                      ],
                     ),
                   ),
-                  items: _universityData.keys.map((String faculty) {
-                    return DropdownMenuItem<String>(
-                      value: faculty,
-                      child: Text(faculty, overflow: TextOverflow.ellipsis),
-                    );
-                  }).toList(),
-                  onChanged: (String? newFaculty) {
-                    setState(() {
-                      _selectedFaculty = newFaculty;
-                      _selectedStudyProgram = null;
-                      _availableStudyPrograms = _universityData[newFaculty] ?? [];
-                    });
-                  },
                 ),
-                const SizedBox(height: 16),
-                DropdownButtonFormField<String>(
-                  value: _selectedStudyProgram,
-                  hint: const Text('Pilih Program Studi'),
-                  isExpanded: true,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.school_outlined, color: AppColors.primary),
-                    filled: true,
-                    fillColor: AppColors.cardBg,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                  items: _availableStudyPrograms.map((String prodi) {
-                    return DropdownMenuItem<String>(
-                      value: prodi,
-                      child: Text(prodi, overflow: TextOverflow.ellipsis),
-                    );
-                  }).toList(),
-                  onChanged: _selectedFaculty == null ? null : (String? newProdi) {
-                    setState(() {
-                      _selectedStudyProgram = newProdi;
-                    });
-                  },
-                ),
-                const SizedBox(height: 24),
-                CustomButton(
-                  text: 'Daftar',
-                  onPressed: _handleSignUp,
-                ),
-                const SizedBox(height: 24),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
