@@ -5,6 +5,7 @@ import 'package:quizify/providers/auth_provider.dart';
 import 'package:quizify/providers/quiz_provider.dart';
 import '../widgets/custom_button.dart';
 import 'quiz_screen.dart';
+import 'profile_screen.dart';
 import 'signin_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,6 +20,15 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Quizify'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.person_rounded, color: AppColors.primary),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.logout_rounded, color: AppColors.error),
             onPressed: () {
@@ -39,15 +49,15 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: const EdgeInsets.all(24),
+                height: 120,
+                width: 120,
                 decoration: BoxDecoration(
                   color: AppColors.primarySoft,
                   shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.quiz_rounded,
-                  size: 80,
-                  color: AppColors.primary,
+                  image: const DecorationImage(
+                    image: AssetImage('assets/images/logo.png'),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               const SizedBox(height: 32),
@@ -69,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                   color: AppColors.textSecondary,
                 ),
               ),
-              const Spacer(),
+              const SizedBox(height: 40),
               CustomButton(
                 text: 'Mulai Kuis 🚀',
                 onPressed: () {
@@ -81,6 +91,35 @@ class HomeScreen extends StatelessWidget {
                     ),
                   );
                 },
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                height: 54,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: AppColors.primary, width: 2),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ProfileScreen(),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    'Lihat Profil & Riwayat 👤',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primary,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),

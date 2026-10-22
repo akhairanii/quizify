@@ -6,6 +6,9 @@ class AuthProvider extends ChangeNotifier {
   final List<User> _registeredUsers = [];
   String? _errorMessage;
 
+  String lastRegisteredEmail = '';
+  String lastRegisteredPassword = '';
+
   User? get currentUser => _currentUser;
   String? get errorMessage => _errorMessage;
 
@@ -24,14 +27,17 @@ class AuthProvider extends ChangeNotifier {
     }
 
     final newUser = User(
-        name: name,
-        email: email,
-        password: password,
-        faculty: faculty,
-        studyProgram: studyProgram,
+      name: name,
+      email: email,
+      password: password,
+      faculty: faculty,
+      studyProgram: studyProgram,
     );
     _registeredUsers.add(newUser);
-    _currentUser = newUser;
+
+    lastRegisteredEmail = email;
+    lastRegisteredPassword = password;
+
     _errorMessage = null;
     notifyListeners();
     return true;

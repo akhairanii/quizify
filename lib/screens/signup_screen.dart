@@ -4,7 +4,6 @@ import '../constants/app_colors.dart';
 import '../providers/auth_provider.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
-import 'home_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -149,10 +148,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
 
     if (success) {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-            (route) => false,
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Pendaftaran berhasil! Silakan tekan Masuk.')),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(

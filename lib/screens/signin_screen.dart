@@ -19,6 +19,18 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      if (authProvider.lastRegisteredEmail.isNotEmpty) {
+        _emailController.text = authProvider.lastRegisteredEmail;
+        _passwordController.text = authProvider.lastRegisteredPassword;
+      }
+    });
+  }
+
+  @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
