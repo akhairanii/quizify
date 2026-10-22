@@ -59,9 +59,9 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  void updateReason(String newReason) {
+  void updateMotivation(String newMotivation) {
     if (_currentUser != null) {
-      _currentUser!.reason = newReason;
+      _currentUser!.motivation = newMotivation;
       notifyListeners();
     }
   }

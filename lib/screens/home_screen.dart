@@ -11,8 +11,15 @@ import 'profile_screen.dart';
 import 'history_screen.dart';
 import 'signin_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String? _selectedNav;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +95,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 32),
                       Text(
-                        'Halo, $userName! 👋',
+                        'Halo, $userName!',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 26,
@@ -107,8 +114,12 @@ class HomeScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 40),
                       CustomButton(
-                        text: 'Mulai Kuis 🚀',
+                        text: 'Mulai Kuis',
+                        isSelected: _selectedNav == 'mulai',
                         onPressed: () {
+                          setState(() {
+                            _selectedNav = 'mulai';
+                          });
                           showModalBottomSheet(
                             context: context,
                             backgroundColor: isDark ? const Color(0xFF1E1A29) : AppColors.cardBg,
@@ -168,26 +179,32 @@ class HomeScreen extends StatelessWidget {
                         },
                       ),
                       const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 54,
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: AppColors.primary, width: 2),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            _selectedNav = 'riwayat';
+                          });
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HistoryScreen(),
                             ),
+                          );
+                        },
+                        borderRadius: BorderRadius.circular(16),
+                        child: Container(
+                          width: double.infinity,
+                          height: 54,
+                          decoration: BoxDecoration(
+                            color: _selectedNav == 'riwayat'
+                                ? AppColors.primary.withOpacity(0.2)
+                                : Colors.transparent,
+                            border: Border.all(color: AppColors.primary, width: 2),
+                            borderRadius: BorderRadius.circular(16),
                           ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const HistoryScreen(),
-                              ),
-                            );
-                          },
+                          alignment: Alignment.center,
                           child: const Text(
-                            'Riwayat Kuis 📊',
+                            'Riwayat Kuis',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -197,26 +214,32 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 54,
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: AppColors.primary, width: 2),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            _selectedNav = 'profil';
+                          });
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ProfileScreen(),
                             ),
+                          );
+                        },
+                        borderRadius: BorderRadius.circular(16),
+                        child: Container(
+                          width: double.infinity,
+                          height: 54,
+                          decoration: BoxDecoration(
+                            color: _selectedNav == 'profil'
+                                ? AppColors.primary.withOpacity(0.2)
+                                : Colors.transparent,
+                            border: Border.all(color: AppColors.primary, width: 2),
+                            borderRadius: BorderRadius.circular(16),
                           ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const ProfileScreen(),
-                              ),
-                            );
-                          },
+                          alignment: Alignment.center,
                           child: const Text(
-                            'Lihat Profil 👤',
+                            'Lihat Profil',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,

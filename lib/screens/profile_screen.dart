@@ -4,7 +4,6 @@ import '../constants/app_colors.dart';
 import '../providers/auth_provider.dart';
 import '../providers/theme_provider.dart';
 import '../widgets/custom_button.dart';
-import '../widgets/custom_text_field.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -14,18 +13,21 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final TextEditingController _reasonController = TextEditingController();
+  final TextEditingController _motivationController = TextEditingController();
+  bool _isEditing = false;
+  String _tempMotivation = '';
 
   @override
   void initState() {
     super.initState();
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    _reasonController.text = authProvider.currentUser?.reason ?? '';
+    _motivationController.text = authProvider.currentUser?.motivation ?? '';
+    _tempMotivation = _motivationController.text;
   }
 
   @override
   void dispose() {
-    _reasonController.dispose();
+    _motivationController.dispose();
     super.dispose();
   }
 
@@ -139,31 +141,86 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      Text(
-                        'Alasan Ikut Serta Kuis Fasilkom-TI',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: isDark ? Colors.white : AppColors.textPrimary),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Kata-kata Semangat / Motivasi',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: isDark ? Colors.white : AppColors.textPrimary),
+                          ),
+                          if (!_isEditing)
+                            IconButton(
+                              icon: const Icon(Icons.edit, color: AppColors.primary),
+                              onPressed: () {
+                                setState(() {
+                                  _tempMotivation = _motivationController.text;
+                                  _isEditing = true;
+                                });
+                              },
+                            ),
+                        ],
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Tuliskan alasan Anda mengikuti kuis Fasilkom-TI meskipun berasal dari luar fakultas:',
+                        'Tuliskan motivasi atau kata-kata semangat belajar Anda:',
                         style: TextStyle(fontSize: 13, color: isDark ? Colors.white70 : AppColors.textSecondary),
                       ),
                       const SizedBox(height: 12),
-                      CustomTextField(
-                        controller: _reasonController,
-                        hintText: 'Masukkan alasan Anda di sini...',
-                        prefixIcon: Icons.edit_note_rounded,
+                      TextField(
+                        controller: _motivationController,
+                        enabled: _isEditing,
+                        maxLines: 3,
+                        style: TextStyle(color: isDark ? Colors.white : AppColors.textPrimary),
+                        decoration: InputDecoration(
+                          hintText: 'Belum ada motivasi...',
+                          hintStyle: TextStyle(color: isDark ? Colors.white38 : AppColors.textSecondary),
+                          filled: true,
+                          fillColor: isDark ? const Color(0xFF1E1A29) : AppColors.cardBg,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            borderSide: BorderSide.none,
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 24),
-                      CustomButton(
-                        text: 'Simpan Alasan 💾',
-                        onPressed: () {
-                          authProvider.updateReason(_reasonController.text.trim());
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Alasan berhasil disimpan!')),
-                          );
-                        },
-                      ),
+                      if (_isEditing)
+                        Row(
+                          children: [
+                            Expanded(
+                              child: SizedBox(
+                                height: 50,
+                                child: OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
+                                    side: const BorderSide(color: AppColors.error, width: 2),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _motivationController.text = _tempMotivation;
+                                      _isEditing = false;
+                                    });
+                                  },
+                                  child: const Text('Batal', style: TextStyle(color: AppColors.error, fontWeight: FontWeight.bold)),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: CustomButton(
+                                text: 'Simpan',
+                                onPressed: () {
+                                  authProvider.updateMotivation(_motivationController.text.trim());
+                                  setState(() {
+                                    _isEditing = false;
+                                  });
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Motivasi berhasil disimpan!')),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                     ],
                   ),
                 ),

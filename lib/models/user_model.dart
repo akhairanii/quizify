@@ -4,7 +4,7 @@ class User {
   final String password;
   final String faculty;
   final String studyProgram;
-  String reason;
+  String motivation;
 
   User({
     required this.name,
@@ -12,6 +12,6 @@ class User {
     required this.password,
     required this.faculty,
     required this.studyProgram,
-    this.reason = '',
+    this.motivation = '',
   });
 }
