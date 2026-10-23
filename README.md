@@ -1,17 +1,23 @@
-# quizify
+# Quizify - Aplikasi Kuis Pilihan Ganda
 
-A new Flutter project.
+## Identitas Mahasiswa
+- **Nama**: Annisa Khairani
+- **NIM**: 241401022
+- **Lab**: Pemrograman Mobile PM 1
 
-## Getting Started
+## Informasi Aplikasi
+- **Nama Aplikasi**: Quizify
+- **Deskripsi**: Aplikasi kuis interaktif yang membahas seputar dunia komputer dan teknologi informasi, dapat digunakan oleh mahasiswa berbagai fakultas untuk nambah wawasan.
+- **Fitur Utama**:
+    1. Autentikasi Sign In & Sign Up (Validasi kata sandi min. 8 karakter & dropdown fakultas/prodi dinamis).
+    2. Kuis Interaktif dengan indikator progres real-time dan feedback warna jawaban.
+    3. Halaman Hasil Akhir & Riwayat Kuis lengkap dengan dialog detail percobaan.
+    4. Manajemen Profil dengan fitur edit motivasi belajar.
+    5. Dual Theme Support (Mode Terang & Mode Gelap).
 
-This project is a starting point for a Flutter application.
+## Dokumentasi & Link
+- **Kredit Aset**: Font Urbanist (Google Fonts), Logo & Ikon Aplikasi.
+- **Link Video Presentasi**: https://drive.google.com/file/d/1gweV5GePpEEK4iOBhLIqmZUBypcQ1tA1/view?usp=drivesdk
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshot Aplikasi
+*(Tambahkan gambar screenshot tiap halaman jika ada)*
