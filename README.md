@@ -20,4 +20,3 @@
 - **Link Video Presentasi**: https://drive.google.com/file/d/1gweV5GePpEEK4iOBhLIqmZUBypcQ1tA1/view?usp=drivesdk
 
 ## Screenshot Aplikasi
-*(Tambahkan gambar screenshot tiap halaman jika ada)*
